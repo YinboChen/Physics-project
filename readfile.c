@@ -5,15 +5,28 @@
 int main(){
 	clock_t start, end;
 	double cpu_time_used,info,singlesSum,doublesSum;
-	int i,j,k,count_outer,count_back;
+	int i,j,k,count_outer,count_back,number;
+	char fname[128];
+	//char wname[128];
+	printf("Enter the total number of particles\n");
+	scanf("%d",&number);
+	printf("Numbe =%d\n",number);
+	printf("Enter .txt file name\n");
+	scanf("%s",fname);
+	printf("File =%s\n",fname);
+	//printf("Enter the output file .txt\n");
+	//scanf("%s",wname);
+	//printf("Output=%s\n",wname);
+		
 
 	start = clock();
-	char *filename = "test.txt";
+	//char *filename = "test.txt";
 	int count =0;
-	FILE *fp = fopen(filename, "r");
-	
+	FILE *fp = fopen(fname, "r");
+	//FILE *wp = fopen(wname,"w");
+
 	if(fp == NULL){
-		printf("Error:cound not open file %s", filename);
+		printf("Error:cound not open file %s", fname);
 		return 1;
 	}	
 
@@ -33,7 +46,7 @@ int main(){
 	int output[32];
 	
 	//while(fgets(buffer,MAX_LENGTH,fp)){
-		for(i=0;i<1000000;i++){
+		for(i=0;i<number;i++){
 			//count++;
 			//printf("count=%d\n",count);
 			for(j=0;j<18;j++){
@@ -69,7 +82,7 @@ int main(){
 	
 	fclose(fp);
 	for(k=0;k<32;k++){
-		printf("a[%d] = %d\n", k, output[k]);
+		printf("a[%d] = %f\n", k, (double)output[k]/number);
 		}
 	end = clock();
 	cpu_time_used = ((double)(end -start)) / CLOCKS_PER_SEC;
